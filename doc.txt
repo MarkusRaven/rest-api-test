@@ -1,0 +1,78 @@
+# rest-api-test
+PATH: /registration
+МЕТОД: POST
+ТЕЛО:
+    1. name
+    2. email
+    3. password
+ВОЗВРАЩАЕТСЯ: "success": true
+
+PATH: /login
+МЕТОД: POST
+ПАРАМЕТРЫ:
+    1. email
+    2. password
+ВОЗВРАЩАЕТСЯ: "message": "Success authorization",
+              "userData": {
+                  "tokens": {
+                      "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImlsbmF6LmdpbWF6ZXRkaW5vdjIwMEBtYWlsLnJ1IiwiaWQiOjYsIm5hbWUiOiLQmNC70YzQvdCw0LciLCJpYXQiOjE2NTg0MjY2OTgsImV4cCI6MTY1ODQyODQ5OH0.S6YqoIc7h9mC8fTOecIj705MiNM999L1llhyngXavWI",
+                      "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImlsbmF6LmdpbWF6ZXRkaW5vdjIwMEBtYWlsLnJ1IiwiaWQiOjYsIm5hbWUiOiLQmNC70YzQvdCw0LciLCJpYXQiOjE2NTg0MjY2OTgsImV4cCI6MTY2MTAxODY5OH0.YPKsBlGlrl3hLEmRG6ADUZBU9ElfMe7kvEUuw87aPiM"
+                  },
+                  "user": {
+                      "email": "ilnaz.gimazetdinov200@mail.ru",
+                      "id": 6,
+                      "name": "Ильназ"
+                  }
+              }
+
+PATH: /post
+МЕТОД: GET
+ТЕЛО:
+ВОЗВРАЩАЕТСЯ: [
+                {
+                    "id": 4,
+                    "message": "Какой-то текст",
+                    "media": "media/896db543-0e3b-432b-a683-d8e58135ffd8.jpeg",
+                    "createdAt": "2022-07-21T18:05:24.366Z",
+                    "updatedAt": "2022-07-21T18:05:24.366Z",
+                    "userId": 6,
+                    "user": {
+                        "name": "Ильназ"
+                    }
+                }
+              ]
+          
+PATH: /post/add
+МЕТОД: POST
+ПАРАМЕТРЫ:
+    1. message
+    2. media (file)
+ВОЗВРАЩАЕТСЯ: {
+                "id": 5,
+                "userId": 6,
+                "message": "Какой-то текст",
+                "media": "media/2e3509d0-e85c-4a82-873a-106eaaec2762.jpeg",
+                "updatedAt": "2022-07-21T18:23:25.508Z",
+                "createdAt": "2022-07-21T18:23:25.508Z"
+               }
+               
+PATH: /post/edit
+МЕТОД: POST
+ПАРАМЕТРЫ:
+    1. postId (id поста)
+    2. media (file)
+    3. message
+ВОЗВРАЩАЕТСЯ: {
+                "id": 4,
+                "message": "какой-то текст",
+                "media": "media/ed97b4b4-2f87-4e45-9cb0-9a15251c4bbd.jpeg",
+                "createdAt": "2022-07-21T18:05:24.366Z",
+                "updatedAt": "2022-07-21T18:24:28.296Z",
+                "userId": 6
+               }
+               
+PATH: /post/delete/:id
+МЕТОД: POST
+ПАРАМЕТРЫ:
+    1. id (id поста)
+ВОЗВРАЩАЕТСЯ: "success": true
