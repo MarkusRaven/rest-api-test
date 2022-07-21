@@ -12,8 +12,8 @@ class AuthController {
 				})
 			}
 			const { name, email, password } = req.body
-			const token = await AuthService.registration(name, email, password)
-			return res.json(token)
+			const result = await AuthService.registration(name, email, password)
+			return res.json(result)
 		} catch (e) {
 			res.status(400).send({
 				message: 'registration error',

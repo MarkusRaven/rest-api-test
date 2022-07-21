@@ -10,13 +10,8 @@ class AuthSevice {
 			throw new Error('Пользователь с таким email уже существует')
 		}
 		const hashPassword = await bcrypt.hash(password, 3)
-		const user = await User.create({ email, password: hashPassword, name })
-		const userDto = new UserDto(user.get({ plain: true }))
-		const token = await TokenService.generateTokens({
-			...userDto,
-		})
-		await TokenService.saveToken(userDto.id, token.refreshToken)
-		return token
+		await User.create({ email, password: hashPassword, name })
+		return { success: true }
 	}
 	async login(email, password) {
 		const user = await User.findOne({ where: { email } })
@@ -31,6 +26,7 @@ class AuthSevice {
 		const tokens = await TokenService.generateTokens({
 			...userDto,
 		})
+		await TokenService.saveToken(userDto.id, tokens.refreshToken)
 		return { tokens, user: userDto }
 	}
 	async refresh(refreshToken) {
